@@ -1,9 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import {
-    BarChart3,
     Calendar,
     Megaphone,
     Image as ImageIcon,
@@ -15,7 +14,6 @@ import {
 } from 'lucide-react'
 
 export default function AdminDashboard() {
-    const [activeTab, setActiveTab] = useState('overview')
     const [stats] = useState([
         { name: 'Total Events', value: '12', icon: Calendar, color: 'text-blue-600', bg: 'bg-blue-50' },
         { name: 'Active Announcements', value: '5', icon: Megaphone, color: 'text-orange-600', bg: 'bg-orange-50' },

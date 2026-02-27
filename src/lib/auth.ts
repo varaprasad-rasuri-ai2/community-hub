@@ -1,16 +1,16 @@
-import jwt from 'jsonwebtoken'
+import jwt, { JwtPayload } from 'jsonwebtoken'
 import { cookies } from 'next/headers'
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key'
 
-export async function signJWT(payload: any) {
+export async function signJWT(payload: JwtPayload): Promise<string> {
     return jwt.sign(payload, JWT_SECRET, { expiresIn: '1d' })
 }
 
-export async function verifyJWT(token: string) {
+export async function verifyJWT(token: string): Promise<JwtPayload | null> {
     try {
-        return jwt.verify(token, JWT_SECRET)
-    } catch (error) {
+        return jwt.verify(token, JWT_SECRET) as JwtPayload
+    } catch {
         return null
     }
 }

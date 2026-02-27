@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import { Calendar, MapPin, Clock } from 'lucide-react'
 import Link from 'next/link'
 
@@ -32,10 +33,11 @@ const EventCard = ({ event }: EventCardProps) => {
             <Link href={`/events/${event.id}`}>
                 <div className="relative h-48 w-full overflow-hidden">
                     {event.coverImage ? (
-                        <img
+                        <Image
                             src={event.coverImage}
                             alt={event.title}
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            fill
+                            className="object-cover transition-transform duration-500 group-hover:scale-110"
                         />
                     ) : (
                         <div className="w-full h-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white/20">

@@ -1,8 +1,32 @@
-const { PrismaClient } = require('@prisma/client')
+import { PrismaClient } from '@prisma/client'
+import bcrypt from 'bcryptjs'
+
 const seedPrisma = new PrismaClient()
+
+// Create a hashed password for admin
+async function createAdminUser() {
+    const hashedPassword = await bcrypt.hash('admin123', 10)
+    const existingAdmin = await seedPrisma.user.findUnique({
+        where: { email: 'admin@community.com' }
+    })
+    
+    if (!existingAdmin) {
+        await seedPrisma.user.create({
+            data: {
+                email: 'admin@community.com',
+                password: hashedPassword,
+                name: 'Admin'
+            }
+        })
+        console.log('Created admin user: admin@community.com / admin123')
+    }
+}
 
 async function main() {
     console.log('Seeding Database...')
+
+    // Create admin user first
+    await createAdminUser()
 
     // Insert Women's Day Event
     const event = await seedPrisma.event.create({

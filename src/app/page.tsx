@@ -2,63 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, Calendar, Megaphone, Image as ImageIcon } from 'lucide-react'
 import EventCard from '@/components/EventCard'
 import AnnouncementCard from '@/components/AnnouncementCard'
-
-// Mock data for initial UI (until DB is seeded)
-const mockEvents = [
-  {
-    id: 'liva-expo-2026',
-    title: "WOMEN'S DAY SPECIAL LIVA EXPO! 🌟",
-    description: "Get ready for an evening full of shopping, food, and fun right in our community! 🎉",
-    date: new Date('2026-03-08'),
-    location: 'Sri Tirumala Millennium, Phase 3, Drive Way',
-    category: 'Celebration',
-    coverImage: '/media/events/womens-day/womens-day-1.jpeg'
-  },
-  {
-    id: 'holi-2026',
-    title: "STM Phase 3 Holi Celebrations",
-    description: "शुभ होली (Happy Holi) - Holika Dahan: 3rd March, 7:00 PM | Holi with Colours: 4th March Morning.",
-    date: new Date('2026-03-03'),
-    location: 'STM Phase 3',
-    category: 'Celebration',
-    coverImage: '/media/events/holi/holi-poster.jpeg'
-  },
-  {
-    id: '1',
-    title: 'Summer Pooled Party',
-    description: 'Join us for a day of fun, food, and music at the community pool! BBQ will be provided.',
-    date: new Date('2026-07-15'),
-    location: 'Central Pool Area',
-    category: 'Social',
-    coverImage: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=1000'
-  }
-]
-
-const mockAnnouncements = [
-  {
-    title: "Flash News: Women's Day LIVA EXPO! 🌟",
-    message: "D Block Committee with Coordination of Phase 3 Federation presents Women's Day Special! Join us on March 8th, 4PM-10PM.",
-    createdAt: new Date()
-  },
-  {
-    title: "Upcoming: STM Phase 3 Holi Celebrations!",
-    message: "Join us for Holi celebrations! Holika Dahan on March 3rd at 7:00 PM. Holi with Colours on March 4th Morning. Enjoy Rain Dance, DJ & Music, Food Stalls, and Fun Activities.",
-    createdAt: new Date()
-  },
-  {
-    title: 'Facility Maintenance',
-    message: 'The gym will be closed for quarterly maintenance on Monday from 8 AM to 2 PM.',
-    createdAt: new Date()
-  },
-  {
-    title: 'New Recycling Policy',
-    message: 'Please review the updated recycling guidelines posted in the lobby.',
-    createdAt: new Date()
-  }
-]
 
 const MOCK_GALLERY = [
   '/media/events/zumba/zumba-poster.jpeg',
@@ -67,9 +14,27 @@ const MOCK_GALLERY = [
   '/media/events/womens-day/womens-day-2.jpeg',
 ]
 
+interface HomeEvent {
+  id: string
+  title: string
+  description: string
+  date: Date
+  time?: string
+  location: string
+  category?: string
+  coverImage?: string
+}
+
+interface HomeAnnouncement {
+  id?: string
+  title: string
+  message: string
+  createdAt: Date
+}
+
 export default function Home() {
-  const [events, setEvents] = useState([])
-  const [announcements, setAnnouncements] = useState([])
+  const [events, setEvents] = useState<HomeEvent[]>([])
+  const [announcements, setAnnouncements] = useState<HomeAnnouncement[]>([])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -80,16 +45,16 @@ export default function Home() {
         ])
 
         if (eventsRes.ok) {
-          const eventsData = await eventsRes.json()
+          const eventsData: HomeEvent[] = await eventsRes.json()
           setEvents(eventsData)
         }
 
         if (announcementsRes.ok) {
-          const announcementsData = await announcementsRes.json()
+          const announcementsData: HomeAnnouncement[] = await announcementsRes.json()
           setAnnouncements(announcementsData)
         }
-      } catch (err) {
-        console.error('Error fetching dashboard data:', err)
+      } catch (error) {
+        console.error('Error fetching dashboard data:', error)
       }
     }
 
@@ -101,10 +66,12 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative h-[600px] flex items-center justify-center overflow-hidden rounded-[40px] mx-4">
         <div className="absolute inset-0 z-0">
-          <img
+          <Image
             src="/media/community/stm-entrance.jpg"
             alt="Community"
-            className="w-full h-full object-cover brightness-50"
+            fill
+            className="object-cover brightness-50"
+            priority
           />
         </div>
 
@@ -149,7 +116,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {announcements.slice(0, 3).map((a: any, i) => (
+            {announcements.slice(0, 3).map((a, i) => (
               <AnnouncementCard key={i} announcement={a} />
             ))}
           </div>
@@ -171,7 +138,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {events.slice(0, 3).map((e: any) => (
+            {events.slice(0, 3).map((e) => (
               <EventCard key={e.id} event={e} />
             ))}
           </div>
@@ -195,10 +162,11 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {MOCK_GALLERY.map((imgSrc, i) => (
               <div key={i} className="aspect-square rounded-3xl overflow-hidden bg-slate-100 group cursor-pointer relative">
-                <img
+                <Image
                   src={imgSrc}
                   alt="Gallery"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 brightness-90 group-hover:brightness-100"
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110 brightness-90 group-hover:brightness-100"
                 />
               </div>
             ))}

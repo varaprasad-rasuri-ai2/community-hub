@@ -2,13 +2,31 @@
 
 import { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import { motion } from 'framer-motion'
-import { Calendar, MapPin, Clock, ArrowLeft, Tag, Share2 } from 'lucide-react'
+import Image from 'next/image'
+import { Calendar, MapPin, Clock, ArrowLeft, Share2 } from 'lucide-react'
+
+interface Media {
+    id: string
+    url: string
+    type: string
+}
+
+interface CommunityEvent {
+    id: string
+    title: string
+    description: string
+    date: Date | string
+    time?: string
+    location: string
+    category?: string
+    coverImage?: string
+    media?: Media[]
+}
 
 export default function EventDetail() {
     const { id } = useParams()
     const router = useRouter()
-    const [event, setEvent] = useState<any>(null)
+    const [event, setEvent] = useState<CommunityEvent | null>(null)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -19,13 +37,15 @@ export default function EventDetail() {
                     const data = await res.json()
                     setEvent(data)
                 }
-            } catch (err) {
-                console.error(err)
+            } catch (error) {
+                console.error('Failed to fetch event:', error)
             } finally {
                 setLoading(false)
             }
         }
-        fetchEvent()
+        if (id) {
+            fetchEvent()
+        }
     }, [id])
 
     if (loading) return (
@@ -52,10 +72,12 @@ export default function EventDetail() {
             </button>
 
             <div className="relative h-[400px] w-full rounded-[3rem] overflow-hidden mb-12 shadow-2xl">
-                <img
+                <Image
                     src={event.coverImage || 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=1500'}
                     alt={event.title}
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
+                    priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <div className="absolute bottom-10 left-10">
@@ -83,9 +105,9 @@ export default function EventDetail() {
                         <h2 className="text-2xl font-black mb-6">Gallery</h2>
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                             {event.media && event.media.length > 0 ? (
-                                event.media.map((m: any) => (
-                                    <div key={m.id} className="aspect-square rounded-3xl overflow-hidden bg-slate-100">
-                                        <img src={m.url} alt="Event Media" className="w-full h-full object-cover" />
+                                event.media.map((m) => (
+                                    <div key={m.id} className="aspect-square rounded-3xl overflow-hidden bg-slate-100 relative">
+                                        <Image src={m.url} alt="Event Media" fill className="object-cover" />
                                     </div>
                                 ))
                             ) : (

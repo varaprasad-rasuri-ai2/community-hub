@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
 import { Image as ImageIcon, X } from 'lucide-react'
 
 export default function GalleryPage() {
@@ -20,6 +21,8 @@ export default function GalleryPage() {
         { url: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=800', title: 'Outdoor Cinema' },
         { url: 'https://images.unsplash.com/photo-1522158633578-36c078e5588a?q=80&w=800', title: 'Fitness Meetup' }
     ]
+
+    const isExternalUrl = (url: string) => url.startsWith('http')
 
     return (
         <div className="container mx-auto px-4">
@@ -53,11 +56,19 @@ export default function GalleryPage() {
                                 loop
                                 playsInline
                             />
-                        ) : (
-                            <img
+                        ) : isExternalUrl(photo.url) ? (
+                            <Image
                                 src={photo.url}
-                                alt={photo.title}
-                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                alt={photo.title || 'Gallery Image'}
+                                fill
+                                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                            />
+                        ) : (
+                            <Image
+                                src={photo.url}
+                                alt={photo.title || 'Gallery Image'}
+                                fill
+                                className="object-cover transition-transform duration-700 group-hover:scale-110"
                             />
                         )}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-8">
@@ -95,10 +106,19 @@ export default function GalleryPage() {
                                     controls
                                     autoPlay
                                 />
-                            ) : (
-                                <img
+                            ) : isExternalUrl(selectedMedia.url) ? (
+                                <Image
                                     src={selectedMedia.url}
                                     alt={selectedMedia.title || "Gallery Image"}
+                                    width={1200}
+                                    height={800}
+                                    className="max-h-[85vh] max-w-full rounded-2xl shadow-2xl object-contain bg-black"
+                                />
+                            ) : (
+                                <Image
+                                    src={selectedMedia.url}
+                                    alt={selectedMedia.title || "Gallery Image"}
+                                    fill
                                     className="max-h-[85vh] max-w-full rounded-2xl shadow-2xl object-contain bg-black"
                                 />
                             )}

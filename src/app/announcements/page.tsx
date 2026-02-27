@@ -4,8 +4,15 @@ import { useState, useEffect } from 'react'
 import { Megaphone, Search, Filter } from 'lucide-react'
 import AnnouncementCard from '@/components/AnnouncementCard'
 
+interface Announcement {
+    id: string
+    title: string
+    message: string
+    createdAt: Date
+}
+
 export default function AnnouncementsPage() {
-    const [announcements, setAnnouncements] = useState([])
+    const [announcements, setAnnouncements] = useState<Announcement[]>([])
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -16,8 +23,8 @@ export default function AnnouncementsPage() {
                     const data = await res.json()
                     setAnnouncements(data)
                 }
-            } catch (err) {
-                console.error(err)
+            } catch (error) {
+                console.error('Failed to fetch announcements:', error)
             } finally {
                 setLoading(false)
             }
@@ -62,7 +69,7 @@ export default function AnnouncementsPage() {
                 </div>
             ) : announcements.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {announcements.map((announcement: any) => (
+                    {announcements.map((announcement) => (
                         <AnnouncementCard key={announcement.id} announcement={announcement} />
                     ))}
                 </div>

@@ -1,12 +1,22 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
 import { Calendar, Search, Filter } from 'lucide-react'
 import EventCard from '@/components/EventCard'
 
+interface CommunityEvent {
+    id: string
+    title: string
+    description: string
+    date: Date
+    time?: string
+    location: string
+    category?: string
+    coverImage?: string
+}
+
 export default function EventsPage() {
-    const [events, setEvents] = useState([])
+    const [events, setEvents] = useState<CommunityEvent[]>([])
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -17,8 +27,8 @@ export default function EventsPage() {
                     const data = await res.json()
                     setEvents(data)
                 }
-            } catch (err) {
-                console.error(err)
+            } catch (error) {
+                console.error('Failed to fetch events:', error)
             } finally {
                 setLoading(false)
             }
@@ -63,7 +73,7 @@ export default function EventsPage() {
                 </div>
             ) : events.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {events.map((event: any) => (
+                    {events.map((event) => (
                         <EventCard key={event.id} event={event} />
                     ))}
                 </div>

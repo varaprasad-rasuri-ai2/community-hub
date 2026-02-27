@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Home, Calendar, Megaphone, Image, User, Menu, X } from 'lucide-react'
+import { Home, Calendar, Megaphone, Image, Menu, X } from 'lucide-react'
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false)
