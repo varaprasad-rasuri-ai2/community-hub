@@ -126,3 +126,4 @@ This section serves as the living document for project progress.
 - [ ] **Social Sharing**: Meta tags and share buttons for community events.
 - [ ] **Search & Filtering**: Fully functional search for the Events page.
 - [ ] **Deployment**: One-click deploy setup for Vercel and Railway.
+"# community-hub" 
