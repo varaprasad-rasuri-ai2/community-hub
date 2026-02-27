@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "module": "CommonJS",
+        "target": "ES2018",
+        "esModuleInterop": true
+    },
+    "include": [
+        "prisma/seed.ts"
+    ]
+}
