@@ -102,7 +102,7 @@ export default function Home() {
       <section className="relative h-[600px] flex items-center justify-center overflow-hidden rounded-[40px] mx-4">
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2000"
+            src="/media/community/stm-entrance.jpg"
             alt="Community"
             className="w-full h-full object-cover brightness-50"
           />
