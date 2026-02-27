@@ -18,6 +18,7 @@ interface CommunityEvent {
 export default function EventsPage() {
     const [events, setEvents] = useState<CommunityEvent[]>([])
     const [loading, setLoading] = useState(true)
+    const [error, setError] = useState<string>('')
 
     useEffect(() => {
         const fetchEvents = async () => {
@@ -26,9 +27,13 @@ export default function EventsPage() {
                 if (res.ok) {
                     const data = await res.json()
                     setEvents(data)
+                } else {
+                    const errorData = await res.json()
+                    setError(errorData.details || errorData.error || 'Failed to load events')
                 }
-            } catch (error) {
-                console.error('Failed to fetch events:', error)
+            } catch (err) {
+                console.error('Failed to fetch events:', err)
+                setError('Network error - could not connect to server')
             } finally {
                 setLoading(false)
             }
@@ -70,6 +75,11 @@ export default function EventsPage() {
                     {[1, 2, 3].map(i => (
                         <div key={i} className="h-[400px] rounded-3xl bg-slate-100 dark:bg-slate-800 animate-pulse" />
                     ))}
+                </div>
+            ) : error ? (
+                <div className="bg-red-50 border border-red-200 text-red-700 px-6 py-4 rounded-xl">
+                    <p className="font-semibold">Error loading events</p>
+                    <p className="text-sm mt-1">{error}</p>
                 </div>
             ) : events.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

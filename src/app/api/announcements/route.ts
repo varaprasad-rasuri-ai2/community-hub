@@ -7,9 +7,14 @@ export async function GET() {
         const announcements = await db.announcement.findMany({
             orderBy: { createdAt: 'desc' }
         })
+        console.log('Announcements fetched:', announcements.length)
         return NextResponse.json(announcements)
     } catch (error) {
-        return NextResponse.json({ error: 'Failed to fetch announcements' }, { status: 500 })
+        console.error('Fetch announcements error:', error)
+        return NextResponse.json({ 
+            error: 'Failed to fetch announcements',
+            details: error instanceof Error ? error.message : 'Unknown error'
+        }, { status: 500 })
     }
 }
 

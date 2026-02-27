@@ -14,6 +14,7 @@ interface Announcement {
 export default function AnnouncementsPage() {
     const [announcements, setAnnouncements] = useState<Announcement[]>([])
     const [loading, setLoading] = useState(true)
+    const [error, setError] = useState<string>('')
 
     useEffect(() => {
         const fetchAnnouncements = async () => {
@@ -22,9 +23,13 @@ export default function AnnouncementsPage() {
                 if (res.ok) {
                     const data = await res.json()
                     setAnnouncements(data)
+                } else {
+                    const errorData = await res.json()
+                    setError(errorData.details || errorData.error || 'Failed to load announcements')
                 }
-            } catch (error) {
-                console.error('Failed to fetch announcements:', error)
+            } catch (err) {
+                console.error('Failed to fetch announcements:', err)
+                setError('Network error - could not connect to server')
             } finally {
                 setLoading(false)
             }
@@ -67,6 +72,11 @@ export default function AnnouncementsPage() {
                         <div key={i} className="h-48 rounded-3xl bg-slate-100 dark:bg-slate-800 animate-pulse" />
                     ))}
                 </div>
+            ) : error ? (
+                <div className="bg-red-50 border border-red-200 text-red-700 px-6 py-4 rounded-xl">
+                    <p className="font-semibold">Error loading announcements</p>
+                    <p className="text-sm mt-1">{error}</p>
+                </div>
             ) : announcements.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {announcements.map((announcement) => (
@@ -76,7 +86,7 @@ export default function AnnouncementsPage() {
             ) : (
                 <div className="text-center py-24 bg-slate-50 dark:bg-slate-800/30 rounded-[3rem] border-2 border-dashed border-slate-200 dark:border-slate-700">
                     <Megaphone className="mx-auto text-slate-300 mb-4" size={48} />
-                    <p className="text-slate-500">No announcements found. You're all caught up!</p>
+                    <p className="text-slate-500">No announcements found. You are all caught up!</p>
                 </div>
             )}
         </div>

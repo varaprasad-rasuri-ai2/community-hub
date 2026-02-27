@@ -35,6 +35,8 @@ interface HomeAnnouncement {
 export default function Home() {
   const [events, setEvents] = useState<HomeEvent[]>([])
   const [announcements, setAnnouncements] = useState<HomeAnnouncement[]>([])
+  const [eventsError, setEventsError] = useState<string>('')
+  const [announcementsError, setAnnouncementsError] = useState<string>('')
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,14 +49,22 @@ export default function Home() {
         if (eventsRes.ok) {
           const eventsData: HomeEvent[] = await eventsRes.json()
           setEvents(eventsData)
+        } else {
+          const errorData = await eventsRes.json()
+          setEventsError(errorData.details || errorData.error || 'Failed to load events')
         }
 
         if (announcementsRes.ok) {
           const announcementsData: HomeAnnouncement[] = await announcementsRes.json()
           setAnnouncements(announcementsData)
+        } else {
+          const errorData = await announcementsRes.json()
+          setAnnouncementsError(errorData.details || errorData.error || 'Failed to load announcements')
         }
       } catch (error) {
         console.error('Error fetching dashboard data:', error)
+        setEventsError('Network error - could not connect to server')
+        setAnnouncementsError('Network error - could not connect to server')
       }
     }
 
@@ -115,11 +125,23 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {announcements.slice(0, 3).map((a, i) => (
-              <AnnouncementCard key={i} announcement={a} />
-            ))}
-          </div>
+          {announcementsError ? (
+            <div className="bg-red-50 border border-red-200 text-red-700 px-6 py-4 rounded-xl">
+              <p className="font-semibold">Error loading announcements</p>
+              <p className="text-sm mt-1">{announcementsError}</p>
+            </div>
+          ) : announcements.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {announcements.slice(0, 3).map((a, i) => (
+                <AnnouncementCard key={i} announcement={a} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12 bg-slate-50 dark:bg-slate-800/30 rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-700">
+              <Megaphone className="mx-auto text-slate-300 mb-4" size={48} />
+              <p className="text-slate-500">No announcements yet.</p>
+            </div>
+          )}
         </section>
 
         {/* Upcoming Events Section */}
@@ -137,11 +159,23 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {events.slice(0, 3).map((e) => (
-              <EventCard key={e.id} event={e} />
-            ))}
-          </div>
+          {eventsError ? (
+            <div className="bg-red-50 border border-red-200 text-red-700 px-6 py-4 rounded-xl">
+              <p className="font-semibold">Error loading events</p>
+              <p className="text-sm mt-1">{eventsError}</p>
+            </div>
+          ) : events.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {events.slice(0, 3).map((e) => (
+                <EventCard key={e.id} event={e} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12 bg-slate-50 dark:bg-slate-800/30 rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-700">
+              <Calendar className="mx-auto text-slate-300 mb-4" size={48} />
+              <p className="text-slate-500">No upcoming events. Check back later!</p>
+            </div>
+          )}
         </section>
 
         {/* Gallery Preview */}
