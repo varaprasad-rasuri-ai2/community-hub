@@ -10,7 +10,8 @@ export default function GalleryPage() {
 
     const photos = [
         { url: '/media/events/zumba/zumba-poster.jpeg', title: '🔥 Zumba 2-Day Free Workshop by 2A Dance Studio' },
-        { url: '/media/events/breast-screening/poster.jpeg', title: 'Free Breast Health & Cancer Screening Test' },
+        { url: '/media/events/health-checkup/master-health-checkup.jpeg', title: '🏥 Master Health Checkup Camp' },
+        { url: '/media/events/breast-screening/poster.jpeg', title: '🩺 Breast Health & Cancer Screening Test' },
         { url: '/media/events/breast-screening/video.mp4', title: 'Breast Health & Cancer Awareness Video' },
         { url: '/media/events/holi/holi-poster.jpeg', title: 'STM Phase 3 Holi Celebrations' },
         { url: '/media/events/womens-day/womens-day-1.jpeg', title: "Women's Day Special Liva Expo - 1" },

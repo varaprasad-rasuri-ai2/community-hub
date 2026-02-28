@@ -15,6 +15,10 @@ async function main() {
         message: "2A Dance Studio presents a FREE Fitness Zumba 2-Day Workshop for ladies! 💃 Join us on 27th Feb (Friday) & 28th Feb (Saturday), 5:00–6:00 PM at Phase 2 A-Block Clubhouse, STM. Registration is FREE! Contact Dimpy Jha at 9582745382."
       },
       {
+        title: "🩺 MASTER HEALTH CHECKUP CAMP - 1st March",
+        message: "Hello! SRI TIRUMALA MILLENIUM PHASE-2 & 3 APARTMENT's Residents.\n\nMASTER HEALTH CHECKUP CAMP By MAHESH DIAGNOSTICS in our Society which is going to be held on Sundays (I.e., 01/03/2026 Sunday) From 6:30 AM To 12:30 PM.\n\nThis will be the golden opportunity to get your blood test done.\n\nFor HOME Visit Sample Collection please Contact: 7569829339/8008570951.\n\nThank you.\nMAHESH DIAGNOSTICS"
+      },
+      {
         title: "🩺 FREE Breast Health & Cancer Screening Test - 1st March",
         message: "CONTACT THERMALYSE SYSTEM presents SPECIAL BREAST HEALTH AND BREAST CANCER SCREENING TEST - FREE!\n\nFeatures:\n• No pain\n• No radiation\n• No age restriction\n• Privacy protected\n• Comfortable\n• Can detect cancer before the lump\n\nVenue: Thirumala Millenium, Phase-2, A Block, Party Hall, 1st Floor\nDate: 1st March 2026\nTimings: 10 AM Onwards\nContact: 9440029880, 7993429880\n\nOrganized by: UMANG"
       },
@@ -29,7 +33,7 @@ async function main() {
     ]
   })
 
-  // Create Events with cover images - ordered by date ascending
+  // Create Events with cover images - ordered by date and time ascending
   await prisma.event.createMany({
     data: [
       {
@@ -40,6 +44,15 @@ async function main() {
         location: "Phase 2, A-Block Clubhouse, STM",
         category: "Fitness",
         coverImage: "/media/events/zumba/zumba-poster.jpeg"
+      },
+      {
+        title: "🏥 MASTER HEALTH CHECKUP CAMP",
+        description: "SRI TIRUMALA MILLENIUM PHASE-2 & 3 APARTMENT's Residents.\n\nMASTER HEALTH CHECKUP CAMP By MAHESH DIAGNOSTICS in our Society which is going to be held on Sunday (01/03/2026) From 6:30 AM To 12:30 PM.\n\nThis will be the golden opportunity to get your blood test done.\n\nFor HOME Visit Sample Collection please Contact: 7569829339/8008570951.\n\nThank you.\nMAHESH DIAGNOSTICS",
+        date: new Date("2026-03-01"),
+        time: "6:30 AM – 12:30 PM",
+        location: "Sri Tirumala Millennium, Phase-2 & 3",
+        category: "Health",
+        coverImage: "/media/events/health-checkup/master-health-checkup.jpeg"
       },
       {
         title: "🩺 FREE Breast Health & Cancer Screening Test",
@@ -71,7 +84,7 @@ async function main() {
     ]
   })
 
-  console.log("Data seeded successfully with all events and images!")
+  console.log("Data seeded successfully with all events!")
 }
 
 main()
