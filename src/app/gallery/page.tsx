@@ -10,11 +10,11 @@ export default function GalleryPage() {
 
     const photos = [
         { url: '/media/events/zumba/zumba-poster.jpeg', title: '🔥 Zumba 2-Day Free Workshop by 2A Dance Studio' },
+        { url: '/media/events/breast-screening/poster.jpeg', title: 'Free Breast Health & Cancer Screening Test' },
+        { url: '/media/events/breast-screening/video.mp4', title: 'Breast Health & Cancer Awareness Video' },
         { url: '/media/events/holi/holi-poster.jpeg', title: 'STM Phase 3 Holi Celebrations' },
         { url: '/media/events/womens-day/womens-day-1.jpeg', title: "Women's Day Special Liva Expo - 1" },
         { url: '/media/events/womens-day/womens-day-video.mp4', title: 'Special Expo Video' },
-        { url: '/media/events/contact-thermalyse-system/contact-thermalyse-system.jpeg', title: 'Free Breast Health & Cancer Screening Test' },
-         { url: '/media/events/contact-thermalyse-system/contact-thermalyse-system-video.mp4', title: 'Breast Health & Cancer Awareness Video' },
         { url: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=800', title: 'Community Dinner' },
         { url: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800', title: 'Summer Workshop' },
         { url: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=800', title: 'Holiday Celebration' },

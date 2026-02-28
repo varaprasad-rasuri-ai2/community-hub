@@ -48,7 +48,7 @@ async function main() {
         time: "10:00 AM onwards",
         location: "Thirumala Millenium, Phase-2, A Block, Party Hall, 1st Floor",
         category: "Health",
-        coverImage: "/media/events/contact-thermalyse-system/contact-thermalyse-system.jpeg"
+        coverImage: "/media/events/breast-screening/poster.jpeg"
       },
       {
         title: "STM Phase 3 Holi Celebrations",
