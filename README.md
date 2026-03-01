@@ -1,177 +1,150 @@
-# 📄 COMMUNITY HUB — PHASE 1 MVP
+# 🏢 Community Hub — Resident Presence & Admin Management
 
-A **working internal web app** for your community that allows:
-* Admin to manage events, announcements, and media
-* Residents to **view everything without login**
-* Platform deployed and usable within your apartment
+A premium, modern internal web application designed for residential communities. This platform enables administrators to seamlessly manage community events, announcements, and media, while providing residents with a beautiful, real-time interface to stay informed and engaged—all without requiring a resident login.
 
 ---
 
-## ✅ Build Status
+## ✨ Features at a Glance
 
-- **Lint**: ✅ Passing
-- **Build**: ✅ Successful
+- **Admin Control Center**: Secure dashboard for managing the community's pulse.
+- **Resident-Focused Experience**: Public-facing views for events, announcements, and a media gallery.
+- **Premium Aesthetics**: Built with a "Glassmorphism" design language, featuring smooth animations and a curated color palette.
+- **Instant Engagement**: Real-time updates for the community's latest happenings.
 
----
-
-## 🚀 Technical Highlights
-
-- **Next.js 16 (App Router)**: Modern structure with full TypeScript and Tailwind CSS integration.
-- **Prisma ORM**: Ready-to-use schema for Events, Announcements, and Users.
-- **Glassmorphism UI**: A premium, modern aesthetic for both residents and admins.
-- **Secure Authentication**: JWT-based login with middleware protection for admin routes.
-- **Modular Components**: Reusable `EventCard`, `AnnouncementCard`, `Navbar`, and more.
+For a deep-dive into the functional and technical architecture, check out our **[Project Walkthrough](file:///c:/code/temp/community-hub/walkthrough.md)**.
 
 ---
 
-## 📁 Project Structure
+## 📖 How to Use
 
-### Backend Infrastructure
-- `prisma/schema.prisma`: Database definitions (User, Event, Announcement, Media models)
-- `src/lib/db.ts`: Prisma client singleton
-- `src/lib/auth.ts`: JWT authentication helpers
-- `src/middleware.ts`: Route protection middleware
-- `src/app/api/`: RESTful endpoints for Auth, Events, and Announcements
+### 🏠 For Residents (Public)
+1. **Browse Homepage**: See the hero section for a snapshot of the community's current state.
+2. **View Announcements**: Stay informed with a feed of important community-wide updates.
+3. **Explore Events**: Visit the `/events` page to find upcoming activities and filter for details.
+4. **Gallery**: Preview and view images and videos from past community highlights.
 
-### Frontend Components
-- `src/components/`: Core UI building blocks with Framer Motion animations
-  - `EventCard.tsx`: Event display card with hover animations
-  - `AnnouncementCard.tsx`: Announcement display card
-  - `Navbar.tsx`: Responsive navigation with glassmorphism
-- `src/app/globals.css`: Custom design tokens and utility classes
-
-### Pages
-- `/`: Homepage with hero, announcements, events preview, and gallery
-- `/events`: Full events listing page
-- `/events/[id]`: Individual event details page
-- `/announcements`: All announcements page
-- `/gallery`: Media gallery page
-- `/admin/login`: Admin authentication page
-- `/admin/dashboard`: Admin management interface
+### 🛡️ For Administrators (Private)
+1. **Login**: Go to `/admin/login` and use your secure credentials.
+2. **Dashboard Overview**: Monitor community engagement at a glance.
+3. **Manage Content**: Create, edit, and delete events and announcements.
+4. **Media Management**: Associate new images and videos with specific events via the dashboard.
 
 ---
 
-## 🛠 Features Implemented
+## 🛠 Technology Stack
 
-### Project Setup
-- Next.js project initialized with Tailwind CSS 4 and TypeScript.
-- Essential dependencies: `prisma`, `lucide-react`, `framer-motion`, `jsonwebtoken`, `bcryptjs`, etc.
+The project leverages a modern, high-performance stack for a seamless developer and user experience:
 
-### Database & Auth
-- User, Event, Media, and Announcement models in Prisma schema.
-- JWT-based authentication flow with cookie management.
-- Password hashing with bcryptjs.
+- **Framework**: [Next.js 16 (App Router)](https://nextjs.org/) — Utilizing server components and optimized routing.
+- **Language**: [TypeScript](https://www.typescriptlang.org/) — Ensuring type safety and robust code.
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/) — For rapid, modern UI development with utility-first classes.
+- **Database ORM**: [Prisma](https://www.prisma.io/) — A type-safe ORM for PostgreSQL.
+- **Animations**: [Framer Motion](https://www.framer.com/motion/) — Powering smooth, high-end transitions and micro-interactions.
+- **Authentication**: [JSON Web Tokens (JWT)](https://jwt.io/) & [bcryptjs](https://www.npmjs.com/package/bcryptjs) — Secure admin access and password hashing.
+- **Icons**: [Lucide React](https://lucide.dev/) — A clean and consistent icon set.
 
-### API Routes
-- **Events**: CRUD operations (GET all, GET by id, POST, PUT, DELETE)
-- **Announcements**: List and Create
-- **User Login**: Secure authentication with JWT tokens
+---
 
-### UI & UX
-- Sticky navigation with glassmorphism effect.
-- Premium responsive cards and grids for Events and Gallery.
-- Hero sections with animated transitions using Framer Motion.
-- Mobile-responsive design with hamburger menu.
+## 🏗 Architecture & Configurations
+
+### 📂 Project Structure
+
+- **`/prisma`**: Contains the database schema (`schema.prisma`) and seeding scripts.
+- **`/src/app`**: The core of the Next.js App Router, containing pages and API routes.
+- **`/src/components`**: Reusable UI building blocks (Cards, Navbar, etc.).
+- **`/src/lib`**: Shared utilities like the Prisma client and authentication helpers.
+- **`middleware.ts`**: Handles route protection for the `/admin` section.
+
+### 🗄 Database Schema
+
+The database is powered by PostgreSQL and managed via Prisma. Key models include:
+
+- **`User`**: Stores admin credentials (Name, Email, Hashed Password, Role).
+- **`Event`**: Community events with details like Title, Description, Date, and Location.
+- **`Announcement`**: Important updates broadcasted to all residents.
+- **`Media`**: Images and videos associated with specific events.
 
 ---
 
 ## 🚦 Getting Started
 
 ### 1. Prerequisites
-- Node.js 18+ installed
-- PostgreSQL or any SQL database reachable via URI
+- **Node.js**: Version 18.0.0 or higher.
+- **Database**: A PostgreSQL instance (local or hosted like Neon/Vercel Postgres).
 
-### 2. Setup
-Clone the repository and install dependencies:
+### 2. Installation
+Clone the repository and install the dependencies:
 ```bash
 npm install
 ```
 
-### 3. Environment Variables
+### 3. Environment Setup
 Create a `.env` file in the root directory:
 ```env
-DATABASE_URL="your-postgresql-url"
-JWT_SECRET="your-super-secret-key"
+DATABASE_URL="postgresql://user:password@localhost:5432/community_hub"
+JWT_SECRET="your_secure_random_string"
 ```
 
-### 4. Database Initialization
+### 4. Database Setup
+Initialize the database and generate the Prisma client:
 ```bash
 npx prisma generate
 npx prisma db push
 ```
 
-### 5. Seed Data (Optional)
-This will create sample events, announcements, and an admin user:
+### 5. Seeding Initial Data (Optional)
+Populate your database with a default admin user and sample content:
 ```bash
 npx prisma db seed
 ```
+**Default Admin Credentials:**
+- **Email**: `admin@community.com`
+- **Password**: `admin123`
 
-**Admin Credentials:**
-- Email: `admin@community.com`
-- Password: `admin123`
-
-### 6. Run the Project
+### 6. Development Mode
+Run the development server:
 ```bash
 npm run dev
 ```
-
-The app will be available at `http://localhost:3000`
-
----
-
-## 🛠 Available Scripts
-
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Build for production (includes Prisma generate) |
-| `npm run start` | Start production server |
-| `npm run lint` | Run ESLint for code quality |
+Open [http://localhost:3000](http://localhost:3000) to see the result.
 
 ---
 
-## ✅ Verification Plan
+## 📜 Available Scripts
 
-### Automated
-- Run `npm run lint` to check code quality
-- Run `npm run build` to verify TypeScript and build process
-
-### Manual
-1. **Admin login**: Navigate to `/admin/login` and login with:
-   - Email: `admin@community.com`
-   - Password: `admin123`
-2. **Content Creation**: Create events and announcements via admin dashboard.
-3. **Resident View**: Verify the latest content appears on the public homepage.
-4. **Responsive Check**: Ensure the UI looks premium on both mobile and desktop.
+| Script | Description |
+| :--- | :--- |
+| `npm run dev` | Starts the development server with hot-reloading. |
+| `npm run build` | Builds the application for production. |
+| `npm run start` | Starts the production server after building. |
+| `npm run lint` | Runs ESLint to identify and fix code quality issues. |
 
 ---
 
-## 🗺️ Project Roadmap & Tracking
+## ✅ Verification & Testing
 
-### ✅ Phase 1: MVP Core (COMPLETED)
-- [x] **Project Setup**: Next.js 16, TypeScript, Tailwind CSS 4.
-- [x] **Database Schema**: Prisma models for User, Event, Announcement, and Media.
-- [x] **Authentication**: JWT-based secure login with middleware protection.
-- [x] **Resident UI**: Responsive Homepage, Events list, and Gallery preview.
-- [x] **Admin Dashboard**: Overview layout with statistics and management tables.
-- [x] **Core API**: Endpoints for Events and Announcements management.
+### Automated Checks
+- **Linting**: Ensure code consistency by running `npm run lint`.
+- **Build Verification**: Run `npm run build` to catch any TypeScript or build-time errors.
 
-### ✅ Phase 2: Refinement (COMPLETED)
-- [x] **Project Documentation**: README.md with full documentation
-- [x] **Data Seeding**: Script to create the initial Admin user and sample content.
-- [ ] **Form Validations**: Advanced client-side and server-side validation for admin forms.
-- [ ] **Detailed Error Handling**: User-friendly toasts and error states across the app.
-- [x] **Route Protection**: Fine-tuning middleware for all administrative sub-routes.
+### Manual Walkthrough
+1. **Public View**: Access the homepage to see the latest announcements and event previews.
+2. **Admin Portal**: Navigate to `/admin/login` and authenticate using the default credentials.
+3. **Management**: Test creating/editing an event or announcement via the dashboard.
+4. **Responsive Design**: Verify the experience across mobile, tablet, and desktop views.
 
-### 🚀 Future Roadmap (TO DO)
-- [ ] **Cloudinary Integration**: Real image/video uploads for the Gallery.
-- [ ] **Rich Text Editor**: Add Tiptap or similar for Event descriptions.
-- [ ] **Social Sharing**: Meta tags and share buttons for community events.
-- [ ] **Search & Filtering**: Fully functional search for the Events page.
-- [ ] **Deployment**: One-click deploy setup for Vercel and Railway.
+---
+
+## 🗺 Roadmap
+
+- [x] Initial Phase 1 MVP Core Features.
+- [ ] Integration with Cloudinary for seamless media uploads.
+- [ ] Rich Text Editor support for detailed event descriptions.
+- [ ] Integrated search and advanced filtering for events.
+- [ ] Push notifications for new community announcements.
 
 ---
 
 ## 📝 License
 
-This project is for internal community use.
+This project is licensed for internal community use.
