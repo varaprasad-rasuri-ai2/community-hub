@@ -9,9 +9,9 @@ import AnnouncementCard from '@/components/AnnouncementCard'
 
 const MOCK_GALLERY = [
   '/media/events/zumba/zumba-poster.jpeg',
+  '/media/events/felicitation-adhoc-committee/felicitation-adhoc-committee.png',
   '/media/events/health-checkup/master-health-checkup.jpeg',
   '/media/events/breast-screening/poster.jpeg',
-  '/media/events/holi/holi-poster.jpeg',
 ]
 
 interface HomeEvent {

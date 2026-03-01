@@ -15,6 +15,10 @@ async function main() {
         message: "2A Dance Studio presents a FREE Fitness Zumba 2-Day Workshop for ladies! 💃 Join us on 27th Feb (Friday) & 28th Feb (Saturday), 5:00–6:00 PM at Phase 2 A-Block Clubhouse, STM. Registration is FREE! Contact Dimpy Jha at 9582745382."
       },
       {
+        title: "🎉 Felicitation Ceremony for Ad-hoc Committee Members",
+        message: "Felicitation Ceremony for Ad hoc committee members – organised by Phase 3 committee and Federation\n\nOn behalf of all the residents of Phase 3, we, the committee members, would like to felicitate the previous Ad Hoc Committee members for their dedicated and selfless service to our society.\n\nServing the society is a challenging and time-consuming responsibility. The former Ad Hoc Committee worked tirelessly, without any personal gain, and brought significant improvements and developments to our community. During difficult times, they stood firm for the residents and ensured that important works were completed in the best interest of the society. Their contribution truly deserves appreciation and recognition.\n\n🗓 Day: 28/02/26 Saturday\n🕗 Time: 8:00 PM – 9:00 PM\n🏠 Venue: Club house"
+      },
+      {
         title: "🩺 MASTER HEALTH CHECKUP CAMP - 1st March",
         message: "Hello! SRI TIRUMALA MILLENIUM PHASE-2 & 3 APARTMENT's Residents.\n\nMASTER HEALTH CHECKUP CAMP By MAHESH DIAGNOSTICS in our Society which is going to be held on Sundays (I.e., 01/03/2026 Sunday) From 6:30 AM To 12:30 PM.\n\nThis will be the golden opportunity to get your blood test done.\n\nFor HOME Visit Sample Collection please Contact: 7569829339/8008570951.\n\nThank you.\nMAHESH DIAGNOSTICS"
       },
@@ -44,6 +48,15 @@ async function main() {
         location: "Phase 2, A-Block Clubhouse, STM",
         category: "Fitness",
         coverImage: "/media/events/zumba/zumba-poster.jpeg"
+      },
+      {
+        title: "🎉 Felicitation Ceremony for Ad-hoc Committee Members",
+        description: "Felicitation Ceremony for Ad hoc committee members – organised by Phase 3 committee and Federation\n\nOn behalf of all the residents of Phase 3, we, the committee members, would like to felicitate the previous Ad Hoc Committee members for their dedicated and selfless service to our society. Serving the society is a challenging and time-consuming responsibility. The former Ad Hoc Committee worked tirelessly, without any personal gain, and brought significant improvements and developments to our community. During difficult times, they stood firm for the residents and ensured that important works were completed in the best interest of the society. Their contribution truly deserves appreciation and recognition.\n\n🗓 Day: 28/02/26 Saturday\n🕗 Time: 8:00 PM – 9:00 PM\n🏠 Venue: Club house",
+        date: new Date("2026-02-28"),
+        time: "8:00 PM – 9:00 PM",
+        location: "Club House, Phase 3",
+        category: "Ceremony",
+        coverImage: "/media/events/felicitation-adhoc-committee/felicitation-adhoc-committee.png"
       },
       {
         title: "🏥 MASTER HEALTH CHECKUP CAMP",
