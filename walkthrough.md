@@ -62,6 +62,16 @@ Key packages include `@prisma/client` for DB access and `lucide-react` for icono
 - **Connection String**: Defined in `.env` as `DATABASE_URL`. This string includes the protocol, user, password, host, port, and database name.
 - **Schema Synchronization**: `npx prisma db push` is used during development to sync the `schema.prisma` file with the actual database structure.
 
+#### Vercel Deployment (Neon Database)
+For production deployment on Vercel, the app uses a Neon cloud database:
+- **Neon Provider**: PostgreSQL hosted on AWS (us-east-1)
+- **Connection**: Configured via Vercel Environment Variables
+- **Seeding**: Use `seed-vercel.ts` script to populate data:
+  ```bash
+  set DATABASE_URL=postgresql://neondb_owner:password@ep-xxx.aws.neon.tech/neondb?sslmode=require
+  npx tsx seed-vercel.ts
+  ```
+
 ### 3. Authentication & Security
 - **JWT Secret**: A unique `JWT_SECRET` is required in `.env` to sign and verify session tokens.
 - **Middleware**: The `src/middleware.ts` file intercepts requests to `/admin/*` and redirects to `/admin/login` if a valid token is missing.

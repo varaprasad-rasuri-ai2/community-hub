@@ -85,6 +85,11 @@ DATABASE_URL="postgresql://user:password@localhost:5432/community_hub"
 JWT_SECRET="your_secure_random_string"
 ```
 
+For Vercel deployment, use Neon database:
+```env
+DATABASE_URL="postgresql://neondb_owner:password@ep-xxx.aws.neon.tech/neondb?sslmode=require"
+```
+
 ### 4. Database Setup
 Initialize the database and generate the Prisma client:
 ```bash
@@ -94,8 +99,17 @@ npx prisma db push
 
 ### 5. Seeding Initial Data (Optional)
 Populate your database with a default admin user and sample content:
+
+**Local Development:**
 ```bash
 npx prisma db seed
+```
+
+**Vercel/Neon Database:**
+```bash
+# Set the Neon database URL
+set DATABASE_URL=postgresql://neondb_owner:password@ep-xxx.aws.neon.tech/neondb?sslmode=require
+npx tsx seed-vercel.ts
 ```
 **Default Admin Credentials:**
 - **Email**: `admin@community.com`
