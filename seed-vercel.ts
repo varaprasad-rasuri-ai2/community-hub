@@ -28,7 +28,7 @@ async function main() {
       },
       {
         title: "Upcoming: STM Phase 3 Holi Celebrations!",
-        message: "Join us for Holi celebrations! Holika Dahan on March 3rd at 7:00 PM, followed by Holi with Colours on March 4th Morning. Featuring Rain Dance, DJ, Food Stalls, and Fun Activities for everyone."
+        message: "STM Phase 3 🌸 Holi Celebrations 🌸 शुभ होली\n\n🔥 Holika Dahan: 2nd March, 7:00 PM\n\n🎨 Holi with Colours: 3rd March Morning\n\nSTM Phase 3 Holi Celebration\n\n✔ Avoid Harsh Colours\n✔ Handle Property with Care\n✔ Supervise Your Kids"
       },
       {
         title: "Flash News: Women's Day LIVA EXPO! 🌟",
@@ -78,8 +78,8 @@ async function main() {
       },
       {
         title: "STM Phase 3 Holi Celebrations",
-        description: "शुभ होली (Happy Holi) Holika Dahan: 3rd March, 7:00 PM Holi with Colours: 4th March, Morning Key Attractions: - Rain Dance - DJ & Music - Food Stalls - Fun Activities Community Guidelines: - Avoid Harsh Colours - Handle Property with Care - Supervise Your Kids",
-        date: new Date("2026-03-03"),
+        description: "STM Phase 3 🌸 Holi Celebrations 🌸 शुभ होली\n\n🔥 Holika Dahan: 2nd March, 7:00 PM\n\n🎨 Holi with Colours: 3rd March Morning\n\nKey Attractions:\n- Rain Dance\n- DJ & Music\n- Food Stalls\n- Fun Activities\n\nCommunity Guidelines:\n✔ Avoid Harsh Colours\n✔ Handle Property with Care\n✔ Supervise Your Kids",
+        date: new Date("2026-03-02"),
         time: "7:00 PM onwards",
         location: "STM Phase 3",
         category: "Celebration",
